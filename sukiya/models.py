@@ -16,7 +16,7 @@ class Category(models.Model):
 	def __str__(self):
 		return self.name
 
-
+# Todo:もう少しモデル構造を変更する
 class Menu(models.Model):
 	name = models.CharField(
 		verbose_name='品名',
@@ -29,7 +29,7 @@ class Menu(models.Model):
 	def __str__(self):
 		return self.name
 
-
+# Todo:消費税計算変更
 class Item(models.Model):
 	size_cho = (
 		("1", "ミニ"),
