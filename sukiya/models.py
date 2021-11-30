@@ -16,6 +16,7 @@ class Category(models.Model):
 	def __str__(self):
 		return self.name
 
+
 # Todo:もう少しモデル構造を変更する
 class Menu(models.Model):
 	name = models.CharField(
@@ -28,6 +29,7 @@ class Menu(models.Model):
 
 	def __str__(self):
 		return self.name
+
 
 # Todo:消費税計算変更
 class Item(models.Model):
@@ -65,7 +67,7 @@ class Item(models.Model):
 	)
 
 	def __str__(self):
-		return str(self.menu)
+		return '%s %s' % (self.menu, self.get_size_display())
 
 	def save(self, *args, **kwargs):
 		print(self.menu)
