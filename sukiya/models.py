@@ -103,4 +103,7 @@ class Order(models.Model):
 		blank=True,
 	)
 
+	def __str__(self):
+		return '%s %s' % (self.table_no, self.order_code)
+
 # Todo:集計テーブル作成(悠哉)
