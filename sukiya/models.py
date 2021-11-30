@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Category(models.Model):
@@ -16,6 +17,7 @@ class Category(models.Model):
 	def __str__(self):
 		# return self.name
 		return '%s %s' % (self.name, self.memo)
+
 
 # Todo:もう少しモデル構造を変更する
 
