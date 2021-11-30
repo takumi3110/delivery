@@ -14,10 +14,12 @@ class Category(models.Model):
 	)
 
 	def __str__(self):
-		return self.name
-
+		# return self.name
+		return '%s %s' % (self.name, self.memo)
 
 # Todo:もう少しモデル構造を変更する
+
+
 class Menu(models.Model):
 	name = models.CharField(
 		verbose_name='品名',
@@ -76,3 +78,27 @@ class Item(models.Model):
 		self.tax = tax
 		self.price = price
 		super(Item, self).save(*args, **kwargs)
+
+
+# Todo:注文テーブル作成(荒川：藤澤)
+class Order(models.Model):
+	datetime = models.DateTimeField(
+		verbose_name="来店時間",
+		default=timezone.now,
+	)
+
+	table_no = models.PositiveIntegerField(
+		verbose_name='卓番',
+	)
+
+	order_code = models.PositiveIntegerField(
+		verbose_name="伝票番号",
+	)
+
+	total_price = models.PositiveIntegerField(
+		verbose_name='合計金額',
+		null=True,
+		blank=True,
+	)
+
+# Todo:集計テーブル作成(悠哉)
