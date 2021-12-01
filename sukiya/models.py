@@ -35,6 +35,44 @@ class Menu(models.Model):
 		return self.name
 
 
+class Topping(models.Model):
+	name = models.CharField(
+		verbose_name='トッピング名',
+		max_length=100
+	)
+
+	tax_price = models.PositiveIntegerField(
+		verbose_name='税込価格',
+		null=True, blank=True,
+	)
+
+	price = models.PositiveSmallIntegerField(
+		verbose_name='税抜価格',
+		null=True, blank=True,
+	)
+
+	tax = models.PositiveSmallIntegerField(
+		verbose_name='消費税',
+		default=8,
+		null=True,
+		blank=True,
+	)
+
+	def save(self, *args, **kwargs):
+		tax = int(self.tax_price) * 10 / 110
+		price = int(self.tax_price) / 1.1
+		self.tax = tax
+		self.price = price
+		super(Topping, self).save(*args, **kwargs)
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		verbose_name = 'トッピング'
+		verbose_name_plural = 'トッピング'
+
+
 # Todo:消費税計算変更
 class Item(models.Model):
 	size_cho = (
@@ -53,6 +91,13 @@ class Item(models.Model):
 	size = models.CharField(
 		choices=size_cho,
 		max_length=10
+	)
+	topping = models.ForeignKey(
+		Topping,
+		on_delete=models.CASCADE,
+		verbose_name='トッピング',
+		null=True,
+		blank=True
 	)
 	tax_price = models.PositiveIntegerField(
 		verbose_name='税込価格',
@@ -74,7 +119,6 @@ class Item(models.Model):
 		return '%s %s' % (self.menu, self.get_size_display())
 
 	def save(self, *args, **kwargs):
-		print(self.menu)
 		tax = int(self.tax_price) * 10 / 110
 		price = int(self.tax_price) / 1.1
 		self.tax = tax
@@ -82,14 +126,35 @@ class Item(models.Model):
 		super(Item, self).save(*args, **kwargs)
 
 
-# Todo:注文テーブル作成(荒川：藤澤)
-class Order(models.Model):
-	datetime = models.DateTimeField(
-		verbose_name="来店時間",
-		default=timezone.now,
+class OrderItem(models.Model):
+
+	item = models.ForeignKey(
+		Item,
+		on_delete=models.CASCADE,
+		verbose_name='商品'
 	)
 
-	table_no = models.PositiveIntegerField(
+	quantity = models.PositiveSmallIntegerField(
+		verbose_name='数量',
+		default=1
+	)
+
+	price = models.PositiveIntegerField(
+		verbose_name='金額',
+	)
+
+	def save(self, *args, **kwargs):
+		item_price = self.item.tax_price
+		self.price = item_price * self.quantity
+		super(OrderItem, self).save(*args, **kwargs)
+
+	def __str__(self):
+		return f'{self.topping.name}{self.item.menu.name}'
+
+
+# Todo:注文テーブル作成(荒川：藤澤)
+class Order(models.Model):
+	table_no = models.PositiveSmallIntegerField(
 		verbose_name='卓番',
 	)
 
@@ -97,13 +162,22 @@ class Order(models.Model):
 		verbose_name="伝票番号",
 	)
 
+	datetime = models.DateTimeField(
+		verbose_name="来店時間",
+		default=timezone.now,
+	)
+
+	order_item = models.ManyToManyField(
+		OrderItem,
+		verbose_name='注文商品'
+	)
+
 	total_price = models.PositiveIntegerField(
-		verbose_name='合計金額',
-		null=True,
-		blank=True,
+		verbose_name='合計金額'
 	)
 
 	def __str__(self):
 		return '%s %s' % (self.table_no, self.order_code)
+
 
 # Todo:集計テーブル作成(悠哉)
