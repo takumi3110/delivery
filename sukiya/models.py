@@ -16,6 +16,12 @@ class Category(models.Model):
 		null=True, blank=True,
 	)
 
+	img = models.ImageField(
+		upload_to='images/',
+		null=True,
+		blank=True
+	)
+
 	def __str__(self):
 		return self.name
 
