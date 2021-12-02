@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 
+from user.models import User
+
 
 class Category(models.Model):
 	name = models.CharField(
@@ -15,17 +17,20 @@ class Category(models.Model):
 	)
 
 	def __str__(self):
-		# return self.name
-		return '%s %s' % (self.name, self.memo)
+		return self.name
+
+	class Meta:
+		verbose_name = 'カテゴリー'
+		verbose_name_plural = 'カテゴリー'
 
 
-# Todo:もう少しモデル構造を変更する
-
-
-class Menu(models.Model):
+class Item(models.Model):
 	name = models.CharField(
 		verbose_name='品名',
-		max_length=100)
+		max_length=100,
+		null=True,
+		blank=True
+	)
 	category = models.ForeignKey(
 		Category,
 		on_delete=models.CASCADE,
@@ -34,47 +39,13 @@ class Menu(models.Model):
 	def __str__(self):
 		return self.name
 
-
-class Topping(models.Model):
-	name = models.CharField(
-		verbose_name='トッピング名',
-		max_length=100
-	)
-
-	tax_price = models.PositiveIntegerField(
-		verbose_name='税込価格',
-		null=True, blank=True,
-	)
-
-	price = models.PositiveSmallIntegerField(
-		verbose_name='税抜価格',
-		null=True, blank=True,
-	)
-
-	tax = models.PositiveSmallIntegerField(
-		verbose_name='消費税',
-		default=8,
-		null=True,
-		blank=True,
-	)
-
-	def save(self, *args, **kwargs):
-		tax = int(self.tax_price) * 10 / 110
-		price = int(self.tax_price) / 1.1
-		self.tax = tax
-		self.price = price
-		super(Topping, self).save(*args, **kwargs)
-
-	def __str__(self):
-		return self.name
-
 	class Meta:
-		verbose_name = 'トッピング'
-		verbose_name_plural = 'トッピング'
+		verbose_name = '品名'
+		verbose_name_plural = '品名'
 
 
 # Todo:消費税計算変更
-class Item(models.Model):
+class Menu(models.Model):
 	size_cho = (
 		("1", "ミニ"),
 		("2", "並盛"),
@@ -85,53 +56,56 @@ class Item(models.Model):
 		("7", "キング"),
 	)
 
-	menu = models.ForeignKey(
-		Menu, on_delete=models.CASCADE
+	item = models.ForeignKey(
+		Item,
+		on_delete=models.CASCADE
 	)
 	size = models.CharField(
 		choices=size_cho,
-		max_length=10
-	)
-	topping = models.ForeignKey(
-		Topping,
-		on_delete=models.CASCADE,
-		verbose_name='トッピング',
+		max_length=10,
 		null=True,
 		blank=True
 	)
 	tax_price = models.PositiveIntegerField(
 		verbose_name='税込価格',
-		null=True, blank=True,
+		null=True,
+		blank=True,
 	)
 	price = models.PositiveIntegerField(
 		verbose_name='税抜価格',
-		null=True, blank=True,
+		null=True,
+		blank=True,
 	)
 	tax = models.IntegerField(
 		verbose_name='消費税',
-		null=True, blank=True,
+		null=True,
+		blank=True,
 	)
 	calorie = models.PositiveIntegerField(
 		verbose_name='カロリー'
 	)
 
 	def __str__(self):
-		return '%s %s' % (self.menu, self.get_size_display())
+		return '%s %s' % (self.item.name, self.get_size_display())
 
 	def save(self, *args, **kwargs):
 		tax = int(self.tax_price) * 10 / 110
 		price = int(self.tax_price) / 1.1
 		self.tax = tax
 		self.price = price
-		super(Item, self).save(*args, **kwargs)
+		super(Menu, self).save(*args, **kwargs)
+
+	class Meta:
+		verbose_name = 'メニュー'
+		verbose_name_plural = 'メニュー'
 
 
 class OrderItem(models.Model):
 
-	item = models.ForeignKey(
-		Item,
+	menu = models.ForeignKey(
+		Menu,
 		on_delete=models.CASCADE,
-		verbose_name='商品'
+		verbose_name='メニュー'
 	)
 
 	quantity = models.PositiveSmallIntegerField(
@@ -149,20 +123,24 @@ class OrderItem(models.Model):
 		super(OrderItem, self).save(*args, **kwargs)
 
 	def __str__(self):
-		return f'{self.topping.name}{self.item.menu.name}'
+		return self.menu.item.name
+
+	class Meta:
+		verbose_name = '注文商品'
+		verbose_name_plural = '注文商品'
 
 
 # Todo:注文テーブル作成(荒川：藤澤)
 class Order(models.Model):
-	table_no = models.PositiveSmallIntegerField(
+	table = models.PositiveSmallIntegerField(
 		verbose_name='卓番',
 	)
 
-	order_code = models.PositiveIntegerField(
+	number = models.PositiveIntegerField(
 		verbose_name="伝票番号",
 	)
 
-	datetime = models.DateTimeField(
+	date = models.DateTimeField(
 		verbose_name="来店時間",
 		default=timezone.now,
 	)
@@ -176,8 +154,39 @@ class Order(models.Model):
 		verbose_name='合計金額'
 	)
 
+	ordered = models.BooleanField(
+		verbose_name='注文済み',
+		default=False
+	)
+
 	def __str__(self):
 		return '%s %s' % (self.table_no, self.order_code)
 
+	class Meta:
+		verbose_name = '注文内容'
+		verbose_name_plural = '注文内容'
+
 
 # Todo:集計テーブル作成(悠哉)
+class Invoice(models.Model):
+	contact_user = models.ForeignKey(
+		User,
+		on_delete=models.CASCADE,
+		verbose_name='担当者'
+	)
+
+	order = models.ForeignKey(
+		Order,
+		on_delete=models.CASCADE,
+		verbose_name='注文内容'
+	)
+
+	leaved_date = models.DateTimeField(
+		verbose_name='退店時間',
+		null=True,
+		blank=True
+	)
+
+	def __str__(self):
+		return self.contact_user
+
