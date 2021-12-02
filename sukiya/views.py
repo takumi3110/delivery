@@ -1,5 +1,9 @@
-from django.shortcuts import render
+from django.views.generic import ListView, DetailView, TemplateView
+from django.urls import reverse_lazy
+
+from .models import Category, Item, Menu, OrderItem, Order, Invoice
 
 
-def index(request):
-	return render(request, 'delivery/index.html')
+class CategoryListView(ListView):
+	model = Category
+	template_name = 'sukiya/category_list.html'
