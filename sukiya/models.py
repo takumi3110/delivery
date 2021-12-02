@@ -42,6 +42,21 @@ class Item(models.Model):
 		on_delete=models.CASCADE,
 	)
 
+	new = models.BooleanField(
+		verbose_name='新商品',
+		default=False
+	)
+
+	limited = models.BooleanField(
+		verbose_name='期間限定',
+		default=False
+	)
+
+	recommend = models.BooleanField(
+		verbose_name='おすすめ',
+		default=False
+	)
+
 	def __str__(self):
 		return self.name
 
