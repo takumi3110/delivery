@@ -1,8 +1,32 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
-  <div>
 
+    <div class="row row-cols-1 row-cols-md-3">
+        {% for category in category_list %}
+            <div class="col">
+                <div class="card" id="category{{ category.pk }}">
+                    <div class="card-body">
+                        {{ category.name }}
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            none
+        {% endfor %}
+    </div>
 
-  </div>
 {% endblock %}
+
+{% block javascript %}
+
+    <script type="text/javascript">
+        {% for category in category_list %}
+            $('#category{{ category }}').click(function() {
+                window.location.href = "#";
+            })
+        {% endfor %}
+    </script>
+
+{% endblock javascript %}
