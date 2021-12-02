@@ -6,9 +6,10 @@
     <div class="row row-cols-1 row-cols-md-3">
         {% for category in category_list %}
             <div class="col">
-                <div class="card" id="category{{ category.pk }}">
-                    <div class="card-body">
-                        {{ category.name }}
+                <div class="card category-card" id="category{{ category.pk }}">
+                    <img src="{{ category.img.url }}" class="card-img" alt="{{ category.name }}">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title" style="text-align: center;">{{ category.name }}</h5>
                     </div>
                 </div>
             </div>
