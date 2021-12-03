@@ -85,7 +85,8 @@ class Menu(models.Model):
 
 	item = models.ForeignKey(
 		Item,
-		on_delete=models.CASCADE
+		on_delete=models.CASCADE,
+		verbose_name='商品名'
 	)
 
 	size = models.CharField(
@@ -132,12 +133,40 @@ class Menu(models.Model):
 		verbose_name_plural = 'メニュー'
 
 
+class SetMenu(models.Model):
+	name = models.CharField(
+		verbose_name='セットメニュー名',
+		max_length=100
+	)
+
+	price = models.PositiveIntegerField(
+		verbose_name='税込価格',
+		null=True,
+		blank=True,
+	)
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		verbose_name = 'セットメニュー'
+		verbose_name_plural = 'セットメニュー'
+
+
 class OrderItem(models.Model):
 
 	menu = models.ForeignKey(
 		Menu,
 		on_delete=models.CASCADE,
 		verbose_name='メニュー'
+	)
+
+	set_menu = models.ForeignKey(
+		SetMenu,
+		on_delete=models.CASCADE,
+		verbose_name='セット',
+		null=True,
+		blank=True
 	)
 
 	quantity = models.PositiveSmallIntegerField(
@@ -167,10 +196,10 @@ class OrderItem(models.Model):
 			self.tax_rate = 8
 			tax = 8 / 100
 			price = round(self.menu.price * tax)
-			item_price = self.menu.price + price
+			item_price = self.menu.price + price + self.set_menu.price
 		else:
 			self.tax_rate = 10
-			item_price = self.menu.tax_price
+			item_price = self.menu.tax_price + self.set_menu.price
 		self.price = item_price * self.quantity
 		super(OrderItem, self).save(*args, **kwargs)
 
