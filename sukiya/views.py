@@ -19,6 +19,15 @@ class ItemListView(ListView):
 		qs = obj.order_by('pk')
 		return qs
 
+	def get_context_data(self, *, object_list=None, **kwargs):
+		context = super().get_context_data(**kwargs)
+		size_choices = Menu.size_choice
+		size_dict = {}
+		for size in size_choices:
+			size_dict[size[0]] = size[1]
+		context['size_dict'] = size_dict
+		return context
+
 
 class MenuListView(ListView):
 	model = Menu
