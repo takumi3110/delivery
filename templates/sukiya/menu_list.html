@@ -1,0 +1,45 @@
+<div class="modal-body">
+    <div class="row">
+        <div class="col-9">
+            <div class="row select-menu">
+                <h5 class="menu-title">選択メニュー</h5>
+                <div class="col-6 size-select">
+                    <h5 class="size-title">サイズ変更</h5>
+                    <div class="row row-cols-1 row-cols-md-2">
+                        {% for key, size in size_dict.items %}
+                            <div class="col">
+                                <div class="card text-center mb-3 size-card" id="size{{ key }}">
+                                    <div class="card-body">
+                                        <p class="card-text">{{ size }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% empty %}
+                            none
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-6 set-select">
+                    <h5 class="set-title">お得なセットメニュー</h5>
+                    <div class="row">
+                        <div class="card">
+                          なし
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 order-item">
+            <h5 class="menu-title">注文商品</h5>
+            <p>item name (size)</p>
+            <p>price</p>
+            <i class="fas fa-minus-square"></i>
+            <i class="fas fa-plus-square"></i>
+            <p>小計金額</p>
+            <div class="d-grid gap-2">
+                <button type="button" class="btn btn-block btn-info menu-cancel" data-bs-dismiss="modal">キャンセル</button>
+                <button type="button" class="btn byn-block btn-danger menu-order">注文リストに追加</button>
+            </div>
+        </div>
+    </div>
+</div>
