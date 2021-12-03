@@ -3,15 +3,21 @@
 
 {% block content %}
 
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-9 order-menu">
             <div class="row row-cols-1 row-cols-md-3">
-                {% for menu in menu_list %}
+                {% for item in item_list %}
                     <div class="col">
-                        <div class="card" id="menu{{ menu.pk }}">
-                            <img src="{{ menu.img.url }}" class="card-img" alt="{{ manu.item.name }}">
+                        <div class="card" id="item{{ item.pk }}" data-toggle="modal">
+                            <img src="{{ item.img.url }}" class="card-img" alt="{{ item.name }}">
                             <div class="card-img-overlay">
-                                <p>{{ menu.item.name }}</p>
+                                <p>{{ item.name }}</p>
                             </div>
                         </div>
                     </div>
@@ -25,4 +31,24 @@
         </div>
     </div>
 
+
 {% endblock %}
+
+{% block javascript %}
+
+    <script type="text/javascript">
+
+    $(function() {
+        {% for item in item_list %}
+            $("#item{{ item.pk }}").each(function() {
+                $(this).modalForm({formURL: "{% url 'sukiya:menu_list' item.pk %}"});
+            });
+        {% endfor %}
+        $(".size-card").click(function() {
+            $(this).toggleClass(".is-active");
+        })
+    });
+
+    </script>
+
+{% endblock javascript %}
