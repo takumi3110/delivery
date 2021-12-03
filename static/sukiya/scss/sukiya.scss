@@ -1,5 +1,47 @@
-.card {
-  .category-card:hover {
-    box-shadow: 0 0 20px palevioletred, 0 2px 5px lightslategray;
+body {
+  background-color: palevioletred;
+}
+
+#icon {
+  width: 100px;
+  height: 90px;
+  margin-left: 15px;
+}
+
+.nav-button {
+  font-size: 25px;
+  width: 150px;
+  height: 60px;
+  float: right;
+  border-radius: 15px;
+}
+
+.category-card {
+  width: 300px;
+  height: 208px;
+  margin-top: 15px;
+  overflow: hidden;
+  border-radius: 10px;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1, 1.1);
+    transition: all 0.1s;
+    box-shadow: 0 0 20px gray, 0 2px 5px lightslategray;
   }
+}
+
+.order-list {
+  height: 400px;
+  margin: 15px 0 15px 0;
+  border-radius: 10px;
+  .order-list-header {
+    background-color: lightgreen;
+  }
+  .order-list-footer {
+    background-color: lightgreen;
+  }
+}
+
+.order {
+  background-color: saddlebrown;
 }
