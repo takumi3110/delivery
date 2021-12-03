@@ -57,6 +57,12 @@ class Item(models.Model):
 		default=False
 	)
 
+	img = models.ImageField(
+		upload_to='images/',
+		null=True,
+		blank=True
+	)
+
 	def __str__(self):
 		return self.name
 
@@ -67,7 +73,7 @@ class Item(models.Model):
 
 # Todo:消費税計算変更
 class Menu(models.Model):
-	size_cho = (
+	size_choice = (
 		("1", "ミニ"),
 		("2", "並盛"),
 		("3", "中盛"),
@@ -81,33 +87,38 @@ class Menu(models.Model):
 		Item,
 		on_delete=models.CASCADE
 	)
+
 	size = models.CharField(
-		choices=size_cho,
+		choices=size_choice,
 		max_length=10,
 		null=True,
 		blank=True
 	)
+
 	tax_price = models.PositiveIntegerField(
 		verbose_name='税込価格',
 		null=True,
 		blank=True,
 	)
+
 	price = models.PositiveIntegerField(
 		verbose_name='税抜価格',
 		null=True,
 		blank=True,
 	)
-	tax = models.IntegerField(
+
+	tax = models.PositiveSmallIntegerField(
 		verbose_name='消費税',
 		null=True,
 		blank=True,
 	)
+
 	calorie = models.PositiveIntegerField(
 		verbose_name='カロリー'
 	)
 
 	def __str__(self):
-		return '%s %s' % (self.item.name, self.get_size_display())
+		return f'{self.item.name} ({self.get_size_display()})'
 
 	def save(self, *args, **kwargs):
 		tax = int(self.tax_price) * 10 / 110
@@ -134,12 +145,32 @@ class OrderItem(models.Model):
 		default=1
 	)
 
+	tax_rate = models.PositiveSmallIntegerField(
+		verbose_name='税率',
+		null=True,
+		blank=True
+	)
+
 	price = models.PositiveIntegerField(
 		verbose_name='金額',
+		null=True,
+		blank=True
+	)
+
+	takeout = models.BooleanField(
+		verbose_name='持ち帰り',
+		default=False
 	)
 
 	def save(self, *args, **kwargs):
-		item_price = self.item.tax_price
+		if self.takeout:
+			self.tax_rate = 8
+			tax = 8 / 100
+			price = round(self.menu.price * tax)
+			item_price = self.menu.price + price
+		else:
+			self.tax_rate = 10
+			item_price = self.menu.tax_price
 		self.price = item_price * self.quantity
 		super(OrderItem, self).save(*args, **kwargs)
 
