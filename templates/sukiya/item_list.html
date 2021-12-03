@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-9 order-menu">
+            <div class="row row-cols-1 row-cols-md-3">
+                {% for menu in menu_list %}
+                    <div class="col">
+                        <div class="card" id="menu{{ menu.pk }}">
+                            <img src="{{ menu.img.url }}" class="card-img" alt="{{ manu.item.name }}">
+                            <div class="card-img-overlay">
+                                <p>{{ menu.item.name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    none
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-3">
+            {% include 'side_cart.html' %}
+        </div>
+    </div>
+
+{% endblock %}
