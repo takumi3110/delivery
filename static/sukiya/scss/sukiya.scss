@@ -8,25 +8,31 @@ body {
   margin-left: 15px;
 }
 
-.nav-button {
-  font-size: 25px;
-  width: 150px;
-  height: 60px;
-  float: right;
+.button {
   border-radius: 15px;
+  .nav-button {
+    font-size: 25px;
+    width: 150px;
+    height: 60px;
+    float: right;
+  }
 }
 
-.category-card {
-  width: 300px;
-  height: 208px;
-  margin-top: 15px;
-  overflow: hidden;
-  border-radius: 10px;
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.1, 1.1);
-    transition: all 0.1s;
-    box-shadow: 0 0 20px gray, 0 2px 5px lightslategray;
+
+.order-menu {
+  .card {
+    width: 300px;
+    height: 208px;
+    margin-top: 15px;
+    overflow: hidden;
+    border-radius: 10px;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.1, 1.1);
+      transition: all 0.1s;
+      box-shadow: 0 0 20px gray, 0 2px 5px lightslategray;
+    }
   }
 }
 
@@ -45,3 +51,60 @@ body {
 .order {
   background-color: saddlebrown;
 }
+
+.select-menu {
+  text-align: center;
+  .size-title {
+    color: white;
+    border: darkorange;
+    background-color: darkorange;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+  .set-title {
+    color: white;
+    border: mediumseagreen;
+    background-color: mediumseagreen;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+  .size-select {
+    border: solid 1px white;
+    border-radius: 10px;
+    background-color: lightpink;
+  }
+  .set-select {
+    border: solid 1px white;
+    border-radius: 10px;
+    background-color: palegreen;
+  }
+  .card {
+    cursor: pointer;
+    .size-card {
+      .is-active {
+        border: solid 2px orangered;
+        background-color: palevioletred;
+      }
+    }
+  }
+
+}
+
+.menu-title {
+  color: white;
+  text-align: center;
+  background-color: lightseagreen;
+  border: greenyellow;
+  border-radius: 10px;
+}
+
+.menu-cancel {
+  color: white;
+  border-radius: 10px;
+}
+
+.menu-order {
+  color: white;
+  border-radius: 10px;
+}
+
