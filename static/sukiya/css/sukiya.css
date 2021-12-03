@@ -8,22 +8,24 @@ body {
   margin-left: 15px;
 }
 
-.nav-button {
+.button {
+  border-radius: 15px;
+}
+.button .nav-button {
   font-size: 25px;
   width: 150px;
   height: 60px;
   float: right;
-  border-radius: 15px;
 }
 
-.category-card {
+.order-menu .card {
   width: 300px;
   height: 208px;
   margin-top: 15px;
   overflow: hidden;
   border-radius: 10px;
 }
-.category-card:hover {
+.order-menu .card:hover {
   cursor: pointer;
   transform: scale(1.1, 1.1);
   transition: all 0.1s;
@@ -44,6 +46,59 @@ body {
 
 .order {
   background-color: saddlebrown;
+}
+
+.select-menu {
+  text-align: center;
+}
+.select-menu .size-title {
+  color: white;
+  border: darkorange;
+  background-color: darkorange;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.select-menu .set-title {
+  color: white;
+  border: mediumseagreen;
+  background-color: mediumseagreen;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.select-menu .size-select {
+  border: solid 1px white;
+  border-radius: 10px;
+  background-color: lightpink;
+}
+.select-menu .set-select {
+  border: solid 1px white;
+  border-radius: 10px;
+  background-color: palegreen;
+}
+.select-menu .card {
+  cursor: pointer;
+}
+.select-menu .card .size-card .is-active {
+  border: solid 2px orangered;
+  background-color: palevioletred;
+}
+
+.menu-title {
+  color: white;
+  text-align: center;
+  background-color: lightseagreen;
+  border: greenyellow;
+  border-radius: 10px;
+}
+
+.menu-cancel {
+  color: white;
+  border-radius: 10px;
+}
+
+.menu-order {
+  color: white;
+  border-radius: 10px;
 }
 
 /*# sourceMappingURL=sukiya.css.map */
