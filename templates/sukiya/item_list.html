@@ -44,9 +44,19 @@
                 $(this).modalForm({formURL: "{% url 'sukiya:menu_list' item.pk %}"});
             });
         {% endfor %}
-        $(".size-card").click(function() {
-            $(this).toggleClass(".is-active");
-        })
+        $('#modal').on('show.bs.modal', function() {
+            {% for key, size in size_dict.items %}
+                $("#size{{ key }}").click(function() {
+                    if ($(".is-active").length){
+                        $(".size-card").removeClass("is-active");
+                        $(this).addClass("is-active");
+                    } else {
+                        $(this).addClass("is-active");
+                    }
+                });
+            {% endfor %}
+        });
+
     });
 
     </script>
