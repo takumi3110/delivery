@@ -21,14 +21,20 @@
                 </div>
                 <div class="col-6 set-select">
                     <h5 class="set-title">お得なセットメニュー</h5>
-
+                    {% for set_menu in set_menu_list %}
                     <div class="row">
                         <div class="col">
-                            <div class="card">
-                              なし
+                            <div class="card mb-2 menu-card" id="set{{ set_menu.pk }}">
+                                <div class="card-body">
+                                    <div class="col-12">
+                                        <p class="card-text">{{ set_menu.name }} {{ set_menu.price }}円</p>
+                                        <img src="{{ set_menu.img.url }}" alt="{{ set_menu.name }}">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
