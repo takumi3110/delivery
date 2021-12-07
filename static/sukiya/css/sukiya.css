@@ -78,9 +78,11 @@ body {
 .select-menu .card {
   cursor: pointer;
 }
-.select-menu .card .size-card .is-active {
-  border: solid 2px orangered;
+
+.is-active {
+  border: solid 5px orangered;
   background-color: palevioletred;
+  border-radius: 10px;
 }
 
 .menu-title {

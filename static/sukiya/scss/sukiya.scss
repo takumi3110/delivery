@@ -80,14 +80,13 @@ body {
   }
   .card {
     cursor: pointer;
-    .size-card {
-      .is-active {
-        border: solid 2px orangered;
-        background-color: palevioletred;
-      }
-    }
   }
+}
 
+.is-active {
+  border: solid 5px orangered;
+  background-color: palevioletred;
+  border-radius: 10px;
 }
 
 .menu-title {
