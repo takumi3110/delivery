@@ -2,7 +2,7 @@ from django.views.generic import ListView, DetailView, TemplateView
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 
-from .models import Category, Item, Menu, OrderItem, Order, Invoice
+from .models import Category, Item, Menu, SetMenu, OrderItem, Order, Invoice
 
 
 class CategoryListView(ListView):
@@ -21,12 +21,7 @@ class ItemListView(ListView):
 
 	def get_context_data(self, *, object_list=None, **kwargs):
 		context = super().get_context_data(**kwargs)
-		size_choices = Menu.size_choice
-		size_dict = {}
-		for size in size_choices:
-			size_dict[size[0]] = size[1]
-		context['size_dict'] = size_dict
-		return context
+		return get_context(context)
 
 
 class MenuListView(ListView):
@@ -39,9 +34,15 @@ class MenuListView(ListView):
 
 	def get_context_data(self, *, object_list=None, **kwargs):
 		context = super().get_context_data(**kwargs)
-		size_choices = Menu.size_choice
-		size_dict = {}
-		for size in size_choices:
-			size_dict[size[0]] = size[1]
-		context['size_dict'] = size_dict
-		return context
+		return get_context(context)
+
+
+def get_context(context):
+	set_menu_list = SetMenu.objects.all()
+	size_choices = Menu.size_choice
+	size_dict = {}
+	for size in size_choices:
+		size_dict[size[0]] = size[1]
+	context['size_dict'] = size_dict
+	context['set_menu_list'] = set_menu_list
+	return context
