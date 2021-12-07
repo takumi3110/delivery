@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-9 order-menu">
+            <div class="row row-cols-1 row-cols-md-3">
+                {% for item in item_list %}
+                    <div class="col">
+                        <div class="card" id="item{{ item.pk }}" data-toggle="modal">
+                            <img src="{{ item.img.url }}" class="card-img" alt="{{ item.name }}">
+                            <div class="card-img-overlay">
+                                <p>{{ item.name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    none
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-3">
+            {% include 'side_cart.html' %}
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block javascript %}
+
+    <script type="text/javascript">
+
+    $(function() {
+        {% for item in item_list %}
+            $("#item{{ item.pk }}").each(function() {
+                $(this).modalForm({formURL: "{% url 'sukiya:menu_list' item.pk %}"});
+            });
+        {% endfor %}
+        $('#modal').on('show.bs.modal', function() {
+            {% for key, size in size_dict.items %}
+                $("#size{{ key }}").click(function() {
+                    if ($(".is-active").length){
+                        $(".size-card").removeClass("is-active");
+                        $(this).addClass("is-active");
+                    } else {
+                        $(this).addClass("is-active");
+                    }
+                });
+            {% endfor %}
+        });
+
+    });
+
+    </script>
+
+{% endblock javascript %}

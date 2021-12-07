@@ -1,0 +1,106 @@
+body {
+  background-color: palevioletred;
+}
+
+#icon {
+  width: 100px;
+  height: 90px;
+  margin-left: 15px;
+}
+
+.button {
+  border-radius: 15px;
+}
+.button .nav-button {
+  font-size: 25px;
+  width: 150px;
+  height: 60px;
+  float: right;
+}
+
+.order-menu .card {
+  width: 300px;
+  height: 208px;
+  margin-top: 15px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.order-menu .card:hover {
+  cursor: pointer;
+  transform: scale(1.1, 1.1);
+  transition: all 0.1s;
+  box-shadow: 0 0 20px gray, 0 2px 5px lightslategray;
+}
+
+.order-list {
+  height: 400px;
+  margin: 15px 0 15px 0;
+  border-radius: 10px;
+}
+.order-list .order-list-header {
+  background-color: lightgreen;
+}
+.order-list .order-list-footer {
+  background-color: lightgreen;
+}
+
+.order {
+  background-color: saddlebrown;
+}
+
+.select-menu {
+  text-align: center;
+}
+.select-menu .size-title {
+  color: white;
+  border: darkorange;
+  background-color: darkorange;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.select-menu .set-title {
+  color: white;
+  border: mediumseagreen;
+  background-color: mediumseagreen;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.select-menu .size-select {
+  border: solid 1px white;
+  border-radius: 10px;
+  background-color: lightpink;
+}
+.select-menu .set-select {
+  border: solid 1px white;
+  border-radius: 10px;
+  background-color: palegreen;
+}
+.select-menu .card {
+  cursor: pointer;
+}
+
+.is-active {
+  border: solid 5px orangered;
+  background-color: palevioletred;
+  border-radius: 10px;
+}
+
+.menu-title {
+  color: white;
+  text-align: center;
+  background-color: lightseagreen;
+  border: greenyellow;
+  border-radius: 10px;
+}
+
+.menu-cancel {
+  color: white;
+  border-radius: 10px;
+}
+
+.menu-order {
+  color: white;
+  border-radius: 10px;
+}
+
+/*# sourceMappingURL=sukiya.css.map */

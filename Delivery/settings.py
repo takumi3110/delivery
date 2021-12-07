@@ -17,7 +17,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrap4',
+    'django_bootstrap5',
+    'bootstrap_modal_forms',
     'ldap',
     'user',
     'sukiya',
@@ -46,9 +47,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-            ],
-            'builtins': [
-                'bootstrap4.templatetags.bootstrap4',
             ],
         },
     },
@@ -95,6 +93,10 @@ STATICFILES_DIRS = (
         os.path.join(BASE_DIR, "static"),
     ]
 )
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
