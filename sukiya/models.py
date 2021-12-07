@@ -37,6 +37,7 @@ class Item(models.Model):
 		null=True,
 		blank=True
 	)
+
 	category = models.ForeignKey(
 		Category,
 		on_delete=models.CASCADE,
@@ -71,7 +72,6 @@ class Item(models.Model):
 		verbose_name_plural = '品名'
 
 
-# Todo:消費税計算変更
 class Menu(models.Model):
 	size_choice = (
 		("1", "ミニ"),
@@ -145,6 +145,12 @@ class SetMenu(models.Model):
 		blank=True,
 	)
 
+	img = models.ImageField(
+		upload_to='images/',
+		null=True,
+		blank=True
+	)
+
 	def __str__(self):
 		return self.name
 
@@ -211,7 +217,6 @@ class OrderItem(models.Model):
 		verbose_name_plural = '注文商品'
 
 
-# Todo:注文テーブル作成(荒川：藤澤)
 class Order(models.Model):
 	table = models.PositiveSmallIntegerField(
 		verbose_name='卓番',
@@ -248,7 +253,6 @@ class Order(models.Model):
 		verbose_name_plural = '注文内容'
 
 
-# Todo:集計テーブル作成(悠哉)
 class Invoice(models.Model):
 	contact_user = models.ForeignKey(
 		User,
@@ -270,4 +274,3 @@ class Invoice(models.Model):
 
 	def __str__(self):
 		return self.contact_user
-
