@@ -56,14 +56,10 @@
                 });
             {% endfor %}
             {% for set_menu in set_menu_list %}
-                $('#set{{ set_menu.pk }}').click(function() {
+                $(".setmenu-card").click(function() {
                     if ($(".is-active").length){
-                        if ($(this) === $("#set{{ set_menu.pk }}")){
-                            $(".menu-card").removeClass("is-active");
-                        } else {
-                            $(".menu-card").removeClass("is-active");
-                            $(this).addClass("is-active");
-                        }
+                        $("#set{{ set_menu.pk }}").removeClass("is-active");
+                        $(this).addClass("is-active");
                     } else {
                         $(this).addClass("is-active");
                     }
