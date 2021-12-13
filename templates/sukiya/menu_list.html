@@ -24,7 +24,7 @@
                     {% for set_menu in set_menu_list %}
                     <div class="row">
                         <div class="col">
-                            <div class="card mb-2 menu-card" id="set{{ set_menu.pk }}">
+                            <div class="card mb-2 setmenu-card" id="set{{ set_menu.pk }}">
                                 <div class="card-body">
                                     <div class="col-12">
                                         <p class="card-text">{{ set_menu.name }} {{ set_menu.price }}円</p>
@@ -33,7 +33,7 @@
                                 </div>
                             </div>
                             {% if forloop.last %}
-                                <div class="card mb-2 menu-card non-set" id="nonSet">
+                                <div class="card mb-2 setmenu-card non-set" id="nonSet">
                                     <div class="card body">
                                         <div class="col-12">
                                             <p class="card-text">セットメニューなし</p>
