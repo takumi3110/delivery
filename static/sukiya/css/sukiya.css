@@ -78,6 +78,9 @@ body {
 .select-menu .card {
   cursor: pointer;
 }
+.select-menu .card .non-set {
+  height: 100px;
+}
 
 .is-active {
   border: solid 5px orangered;

@@ -80,6 +80,9 @@ body {
   }
   .card {
     cursor: pointer;
+    & .non-set {
+      height: 100px;
+    }
   }
 }
 
@@ -106,4 +109,6 @@ body {
   color: white;
   border-radius: 10px;
 }
+
+
 

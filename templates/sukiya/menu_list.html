@@ -32,6 +32,16 @@
                                     </div>
                                 </div>
                             </div>
+                            {% if forloop.last %}
+                                <div class="card mb-2 menu-card non-set" id="nonSet">
+                                    <div class="card body">
+                                        <div class="col-12">
+                                            <p class="card-text">セットメニューなし</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% else %}
+                            {% endif %}
                         </div>
                     </div>
                     {% endfor %}

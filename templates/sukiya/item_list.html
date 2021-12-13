@@ -58,7 +58,7 @@
             {% for set_menu in set_menu_list %}
                 $('#set{{ set_menu.pk }}').click(function() {
                     if ($(".is-active").length){
-                        if ($(this) === $(setmenu{{ set_menu.pk }})){
+                        if ($(this) === $("#set{{ set_menu.pk }}")){
                             $(".menu-card").removeClass("is-active");
                         } else {
                             $(".menu-card").removeClass("is-active");
