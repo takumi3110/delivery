@@ -53,46 +53,48 @@ body {
 }
 .select-menu .size-title {
   color: white;
-  border: darkorange;
+  border: solid 1px darkorange;
+  border-radius: 10px;
   background-color: darkorange;
-  border-radius: 10px;
-  margin-top: 10px;
-}
-.select-menu .set-title {
-  color: white;
-  border: mediumseagreen;
-  background-color: mediumseagreen;
-  border-radius: 10px;
   margin-top: 10px;
 }
 .select-menu .size-select {
-  border: solid 1px white;
-  border-radius: 10px;
   background-color: lightpink;
+  border-radius: 10px;
+}
+.select-menu .size-card {
+  height: 75px;
+}
+.select-menu .set-title {
+  color: white;
+  border: solid 1px mediumseagreen;
+  border-radius: 10px;
+  background-color: mediumseagreen;
+  margin-top: 10px;
 }
 .select-menu .set-select {
-  border: solid 1px white;
-  border-radius: 10px;
   background-color: palegreen;
+  border-radius: 10px;
+}
+.select-menu .set-select .non-set {
+  height: 100px;
 }
 .select-menu .card {
   cursor: pointer;
+  border-radius: 10px;
 }
-.select-menu .card .non-set {
-  height: 100px;
+
+.menu-title {
+  text-align: center;
+  color: white;
+  background-color: lightseagreen;
+  border: greenyellow;
+  border-radius: 10px;
 }
 
 .is-active {
   border: solid 5px orangered;
   background-color: palevioletred;
-  border-radius: 10px;
-}
-
-.menu-title {
-  color: white;
-  text-align: center;
-  background-color: lightseagreen;
-  border: greenyellow;
   border-radius: 10px;
 }
 

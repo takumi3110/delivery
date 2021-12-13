@@ -10,7 +10,7 @@ body {
 
 .button {
   border-radius: 15px;
-  .nav-button {
+  & .nav-button {
     font-size: 25px;
     width: 150px;
     height: 60px;
@@ -20,13 +20,12 @@ body {
 
 
 .order-menu {
-  .card {
+  & .card {
     width: 300px;
     height: 208px;
     margin-top: 15px;
     overflow: hidden;
     border-radius: 10px;
-
     &:hover {
       cursor: pointer;
       transform: scale(1.1, 1.1);
@@ -40,10 +39,10 @@ body {
   height: 400px;
   margin: 15px 0 15px 0;
   border-radius: 10px;
-  .order-list-header {
+  & .order-list-header {
     background-color: lightgreen;
   }
-  .order-list-footer {
+  & .order-list-footer {
     background-color: lightgreen;
   }
 }
@@ -54,37 +53,49 @@ body {
 
 .select-menu {
   text-align: center;
-  .size-title {
+  & .size-title {
     color: white;
-    border: darkorange;
+    border: solid 1px darkorange;
+    border-radius: 10px;
     background-color: darkorange;
-    border-radius: 10px;
     margin-top: 10px;
   }
-  .set-title {
-    color: white;
-    border: mediumseagreen;
-    background-color: mediumseagreen;
-    border-radius: 10px;
-    margin-top: 10px;
-  }
-  .size-select {
-    border: solid 1px white;
-    border-radius: 10px;
+  & .size-select {
     background-color: lightpink;
-  }
-  .set-select {
-    border: solid 1px white;
     border-radius: 10px;
-    background-color: palegreen;
   }
-  .card {
-    cursor: pointer;
+  & .size-card {
+    height: 75px;
+  }
+  & .set-title {
+    color: white;
+    border: solid 1px mediumseagreen;
+    border-radius: 10px;
+    background-color: mediumseagreen;
+    margin-top: 10px;
+  }
+  & .set-select {
+    background-color: palegreen;
+    border-radius: 10px;
     & .non-set {
-      height: 100px;
+    height: 100px;
     }
   }
+  & .card {
+    cursor: pointer;
+    border-radius: 10px;
+  }
 }
+
+.menu-title {
+  text-align: center;
+  color: white;
+  background-color: lightseagreen;
+  border: greenyellow;
+  border-radius: 10px;
+}
+
+
 
 .is-active {
   border: solid 5px orangered;
@@ -92,13 +103,7 @@ body {
   border-radius: 10px;
 }
 
-.menu-title {
-  color: white;
-  text-align: center;
-  background-color: lightseagreen;
-  border: greenyellow;
-  border-radius: 10px;
-}
+
 
 .menu-cancel {
   color: white;
