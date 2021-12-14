@@ -6,16 +6,17 @@
                 <div class="col-6 size-select">
                     <h5 class="size-title">サイズ変更</h5>
                     <div class="row row-cols-1 row-cols-md-2">
-                        {% for key, size in size_dict.items %}
+
+                        {% for menu in menu_list %}
                             <div class="col">
-                                <div class="card text-center mb-3 size-card" id="size{{ key }}">
+                                <div class="card text-center mb-3 size-card" id="size{{ menu.size }}">
                                     <div class="card-body">
-                                        <p class="card-text">{{ size }}</p>
+                                        <p class="card-text">{{ menu.get_size_display }}</p>
                                     </div>
                                 </div>
                             </div>
                         {% empty %}
-                            none
+                            とうろくしてください
                         {% endfor %}
                     </div>
                 </div>
@@ -33,8 +34,8 @@
                                 </div>
                             </div>
                             {% if forloop.last %}
-                                <div class="card mb-2 setmenu-card non-set" id="nonSet">
-                                    <div class="card body">
+                                <div class="card mb-2 setmenu-card" id="nonSet">
+                                    <div class="card-body">
                                         <div class="col-12">
                                             <p class="card-text">セットメニューなし</p>
                                         </div>
@@ -50,14 +51,22 @@
         </div>
         <div class="col-3 order-item">
             <h5 class="menu-title">注文商品</h5>
-            <p>item name (size)</p>
-            <p>price</p>
-            <i class="fas fa-minus-square"></i>
-            <i class="fas fa-plus-square"></i>
-            <p>小計金額</p>
-            <div class="d-grid gap-2">
-                <button type="button" class="btn btn-block btn-info menu-cancel" data-bs-dismiss="modal">キャンセル</button>
-                <button type="button" class="btn byn-block btn-danger menu-order">注文リストに追加</button>
+            <div class="row select-item">
+                <p class="item-name">{{ item.name }}</p>
+                <p class="size-text"></p>
+                <img src="{{ item.img.url }}" alt="{{ item.name }}" class="item-image">
+            </div>
+            <div class="row select-price">
+                <i class="fas fa-minus-square"></i>
+                <p class="item-price">price</p>
+                <i class="fas fa-plus-square"></i>
+            </div>
+            <div class="row">
+                <p>小計金額</p>
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-block btn-info menu-cancel" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn byn-block btn-danger menu-order">注文リストに追加</button>
+                </div>
             </div>
         </div>
     </div>

@@ -45,25 +45,40 @@
             });
         {% endfor %}
         $('#modal').on('show.bs.modal', function() {
+            let sizeText = $(".size-text")
             {% for key, size in size_dict.items %}
                 $("#size{{ key }}").click(function() {
                     if ($(".is-active").length){
+                        let replaceText = sizeText.text().replace("{{ size }}", "");
+                        sizeText.text(replaceText);
                         $(".size-card").removeClass("is-active");
                         $(this).addClass("is-active");
+                        $(sizeText).append("{{ size }}");
                     } else {
                         $(this).addClass("is-active");
+                        $(sizeText).append();
                     }
+
                 });
             {% endfor %}
+            let findIsActive = $("#nonSet").find(".is-active");
             {% for set_menu in set_menu_list %}
                 $(".setmenu-card").click(function() {
                     if ($(".is-active").length){
+                        if (findIsActive) {
+                            $("#nonSet").removeClass(("is-active"));
+                        }
                         $("#set{{ set_menu.pk }}").removeClass("is-active");
                         $(this).addClass("is-active");
                     } else {
                         $(this).addClass("is-active");
                     }
                 });
+            {% endfor %}
+            let orderItem = $(".order-item").find("p")
+            {% for menu in menu_list %}
+                $orderItem
+
             {% endfor %}
         });
 
