@@ -29,11 +29,13 @@ class MenuListView(ListView):
 	template_name = 'sukiya/menu_list.html'
 
 	def get_queryset(self):
-		obj = Menu.objects.filter(item_id=self.kwargs['pk'])
+		obj = Menu.objects.filter(item_id=self.kwargs['pk']).order_by('calorie')
 		return obj
 
 	def get_context_data(self, *, object_list=None, **kwargs):
 		context = super().get_context_data(**kwargs)
+		item = Item.objects.get(pk=self.kwargs['pk'])
+		context['item'] = item
 		return get_context(context)
 
 
