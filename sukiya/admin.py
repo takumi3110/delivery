@@ -7,6 +7,7 @@ class MenuInline(admin.TabularInline):
 	extra = 0
 	fields = ('item', 'size', 'tax_price', 'price', 'calorie')
 	readonly_fields = ('price', 'tax')
+	ordering = ('calorie',)
 
 
 class SetMenuAdmin(admin.ModelAdmin):
