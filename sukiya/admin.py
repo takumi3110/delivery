@@ -5,7 +5,8 @@ from .models import Category, Item, Menu, SetMenu, OrderItem, Order, Invoice
 class MenuInline(admin.TabularInline):
 	model = Menu
 	extra = 0
-	readonly_fields = ('item', 'size', 'tax_price', 'price', 'tax', 'calorie')
+	fields = ('item', 'size', 'tax_price', 'price', 'calorie')
+	readonly_fields = ('price', 'tax')
 
 
 class SetMenuAdmin(admin.ModelAdmin):
