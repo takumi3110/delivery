@@ -122,7 +122,8 @@ class Menu(models.Model):
 		return f'{self.item.name} ({self.get_size_display()})'
 
 	def save(self, *args, **kwargs):
-		tax = int(self.tax_price) * 10 / 110
+		tax_rate = 10
+		tax = int(self.tax_price) * tax_rate / 110
 		price = int(self.tax_price) / 1.1
 		self.tax = tax
 		self.price = price
