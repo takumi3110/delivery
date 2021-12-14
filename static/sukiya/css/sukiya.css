@@ -48,6 +48,11 @@ body {
   background-color: saddlebrown;
 }
 
+.card {
+  cursor: pointer;
+  border-radius: 10px;
+}
+
 .select-menu {
   text-align: center;
 }
@@ -63,6 +68,7 @@ body {
   border-radius: 10px;
 }
 .select-menu .size-card {
+  font-size: 25px;
   height: 75px;
 }
 .select-menu .set-title {
@@ -76,12 +82,11 @@ body {
   background-color: palegreen;
   border-radius: 10px;
 }
-.select-menu .set-select .non-set {
-  height: 100px;
+.select-menu .setmenu-card {
+  font-size: 25px;
 }
-.select-menu .card {
-  cursor: pointer;
-  border-radius: 10px;
+.select-menu #nonSet {
+  height: 75px;
 }
 
 .menu-title {
@@ -95,6 +100,7 @@ body {
 .is-active {
   border: solid 5px orangered;
   background-color: palevioletred;
+  color: white;
   border-radius: 10px;
 }
 
@@ -106,6 +112,11 @@ body {
 .menu-order {
   color: white;
   border-radius: 10px;
+}
+
+.item-image {
+  width: 170px;
+  height: 120px;
 }
 
 /*# sourceMappingURL=sukiya.css.map */
